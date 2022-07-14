@@ -1,9 +1,0 @@
-/Users/prompt/Desktop/six/six-protocol/tns/target/debug/deps/terra_cosmwasm-e2492cfb71e89049.rmeta: /Users/prompt/.cargo/registry/src/github.com-1ecc6299db9ec823/terra-cosmwasm-2.2.0/src/lib.rs /Users/prompt/.cargo/registry/src/github.com-1ecc6299db9ec823/terra-cosmwasm-2.2.0/src/msg.rs /Users/prompt/.cargo/registry/src/github.com-1ecc6299db9ec823/terra-cosmwasm-2.2.0/src/querier.rs /Users/prompt/.cargo/registry/src/github.com-1ecc6299db9ec823/terra-cosmwasm-2.2.0/src/query.rs /Users/prompt/.cargo/registry/src/github.com-1ecc6299db9ec823/terra-cosmwasm-2.2.0/src/route.rs
-
-/Users/prompt/Desktop/six/six-protocol/tns/target/debug/deps/terra_cosmwasm-e2492cfb71e89049.d: /Users/prompt/.cargo/registry/src/github.com-1ecc6299db9ec823/terra-cosmwasm-2.2.0/src/lib.rs /Users/prompt/.cargo/registry/src/github.com-1ecc6299db9ec823/terra-cosmwasm-2.2.0/src/msg.rs /Users/prompt/.cargo/registry/src/github.com-1ecc6299db9ec823/terra-cosmwasm-2.2.0/src/querier.rs /Users/prompt/.cargo/registry/src/github.com-1ecc6299db9ec823/terra-cosmwasm-2.2.0/src/query.rs /Users/prompt/.cargo/registry/src/github.com-1ecc6299db9ec823/terra-cosmwasm-2.2.0/src/route.rs
-
-/Users/prompt/.cargo/registry/src/github.com-1ecc6299db9ec823/terra-cosmwasm-2.2.0/src/lib.rs:
-/Users/prompt/.cargo/registry/src/github.com-1ecc6299db9ec823/terra-cosmwasm-2.2.0/src/msg.rs:
-/Users/prompt/.cargo/registry/src/github.com-1ecc6299db9ec823/terra-cosmwasm-2.2.0/src/querier.rs:
-/Users/prompt/.cargo/registry/src/github.com-1ecc6299db9ec823/terra-cosmwasm-2.2.0/src/query.rs:
-/Users/prompt/.cargo/registry/src/github.com-1ecc6299db9ec823/terra-cosmwasm-2.2.0/src/route.rs:
