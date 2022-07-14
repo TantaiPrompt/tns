@@ -1,0 +1,2 @@
+cargo:rustc-env=TYPENUM_BUILD_CONSTS=/Users/prompt/Desktop/six/six-protocol/tns/target/debug/build/typenum-30a73ceb7c23f37f/out/consts.rs
+cargo:rustc-env=TYPENUM_BUILD_OP=/Users/prompt/Desktop/six/six-protocol/tns/target/debug/build/typenum-30a73ceb7c23f37f/out/op.rs

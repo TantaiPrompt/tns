@@ -1,0 +1,11 @@
+/Users/prompt/Desktop/six/six-protocol/tns/target/debug/deps/ed25519_zebra-34d6c95f0ca6bdb1.rmeta: /Users/prompt/.cargo/registry/src/github.com-1ecc6299db9ec823/ed25519-zebra-3.0.0/src/lib.rs /Users/prompt/.cargo/registry/src/github.com-1ecc6299db9ec823/ed25519-zebra-3.0.0/src/batch.rs /Users/prompt/.cargo/registry/src/github.com-1ecc6299db9ec823/ed25519-zebra-3.0.0/src/error.rs /Users/prompt/.cargo/registry/src/github.com-1ecc6299db9ec823/ed25519-zebra-3.0.0/src/signature.rs /Users/prompt/.cargo/registry/src/github.com-1ecc6299db9ec823/ed25519-zebra-3.0.0/src/signing_key.rs /Users/prompt/.cargo/registry/src/github.com-1ecc6299db9ec823/ed25519-zebra-3.0.0/src/verification_key.rs /Users/prompt/.cargo/registry/src/github.com-1ecc6299db9ec823/ed25519-zebra-3.0.0/src/../README.md
+
+/Users/prompt/Desktop/six/six-protocol/tns/target/debug/deps/ed25519_zebra-34d6c95f0ca6bdb1.d: /Users/prompt/.cargo/registry/src/github.com-1ecc6299db9ec823/ed25519-zebra-3.0.0/src/lib.rs /Users/prompt/.cargo/registry/src/github.com-1ecc6299db9ec823/ed25519-zebra-3.0.0/src/batch.rs /Users/prompt/.cargo/registry/src/github.com-1ecc6299db9ec823/ed25519-zebra-3.0.0/src/error.rs /Users/prompt/.cargo/registry/src/github.com-1ecc6299db9ec823/ed25519-zebra-3.0.0/src/signature.rs /Users/prompt/.cargo/registry/src/github.com-1ecc6299db9ec823/ed25519-zebra-3.0.0/src/signing_key.rs /Users/prompt/.cargo/registry/src/github.com-1ecc6299db9ec823/ed25519-zebra-3.0.0/src/verification_key.rs /Users/prompt/.cargo/registry/src/github.com-1ecc6299db9ec823/ed25519-zebra-3.0.0/src/../README.md
+
+/Users/prompt/.cargo/registry/src/github.com-1ecc6299db9ec823/ed25519-zebra-3.0.0/src/lib.rs:
+/Users/prompt/.cargo/registry/src/github.com-1ecc6299db9ec823/ed25519-zebra-3.0.0/src/batch.rs:
+/Users/prompt/.cargo/registry/src/github.com-1ecc6299db9ec823/ed25519-zebra-3.0.0/src/error.rs:
+/Users/prompt/.cargo/registry/src/github.com-1ecc6299db9ec823/ed25519-zebra-3.0.0/src/signature.rs:
+/Users/prompt/.cargo/registry/src/github.com-1ecc6299db9ec823/ed25519-zebra-3.0.0/src/signing_key.rs:
+/Users/prompt/.cargo/registry/src/github.com-1ecc6299db9ec823/ed25519-zebra-3.0.0/src/verification_key.rs:
+/Users/prompt/.cargo/registry/src/github.com-1ecc6299db9ec823/ed25519-zebra-3.0.0/src/../README.md:

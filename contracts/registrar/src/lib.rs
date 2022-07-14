@@ -8,7 +8,7 @@ pub use crate::state::Cw721Contract;
 use cosmwasm_std::Empty;
 pub mod utils;
 pub use tns::registrar::{
-    ExecuteMsg, Extension, InstantiateMsg, MintMsg, MinterResponse, QueryMsg,MigrateMsg
+    ExecuteMsg, Extension, InstantiateMsg, MigrateMsg, MintMsg, MinterResponse, QueryMsg,
 };
 mod test;
 

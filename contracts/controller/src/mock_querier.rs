@@ -4,6 +4,7 @@ use cosmwasm_std::{
     QuerierResult, QueryRequest, SystemError, SystemResult, Uint128, WasmQuery,
 };
 use std::collections::HashMap;
+use std::marker::PhantomData;
 use terra_cosmwasm::{TaxCapResponse, TaxRateResponse, TerraQuery, TerraQueryWrapper, TerraRoute};
 use tns::registrar::{
     GetBaseNodeResponse, GetRegistryResponse, IsAvailableResponse, QueryMsg as RegistrarQueryMsg,
@@ -20,6 +21,7 @@ pub fn mock_dependencies(
         storage: MockStorage::default(),
         api: MockApi::default(),
         querier: custom_querier,
+        custom_query_type: PhantomData,
     }
 }
 
@@ -108,7 +110,9 @@ impl WasmMockQuerier {
                 )),
                 Ok(RegistrarQueryMsg::GetBaseNode {}) => SystemResult::Ok(ContractResult::Ok(
                     to_binary(&GetBaseNodeResponse {
-                        base_node: String::from("749f2b479b45e5da8e4cbecd926ee9a6f78db5424fa6993b6ecababa5d736b12"),
+                        base_node: String::from(
+                            "749f2b479b45e5da8e4cbecd926ee9a6f78db5424fa6993b6ecababa5d736b12",
+                        ),
                     })
                     .unwrap(),
                 )),

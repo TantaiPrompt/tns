@@ -75,9 +75,11 @@ where
             ExecuteMsg::RemoveController { address } => {
                 self.remove_controller(deps, env, info, address)
             }
-            ExecuteMsg::SetConfig { grace_period, registry_address, owner } => {
-                self.set_config(deps, env, info, grace_period, registry_address, owner)
-            }
+            ExecuteMsg::SetConfig {
+                grace_period,
+                registry_address,
+                owner,
+            } => self.set_config(deps, env, info, grace_period, registry_address, owner),
 
             // Only controller
             ExecuteMsg::Register {
@@ -124,6 +126,62 @@ where
     T: Serialize + DeserializeOwned + Clone,
     C: CustomMsg,
 {
+    // pub fn _mint(
+    //     &self,
+    //     deps: DepsMut,
+    //     _env: Env,
+    //     info: MessageInfo,
+    //     owner: String,
+    //     token_uri: Option<String>,
+    //     token_id: String,
+    //     extension: T,
+    // ) -> Result<Response<C>, ContractError> {
+    //     let token = TokenInfo::<T> {
+    //         owner: deps.api.addr_validate(&owner)?,
+    //         approvals: vec![],
+    //         token_uri,
+    //         extension: extension,
+    //     };
+    //     self.tokens
+    //         .update(deps.storage, &token_id, |old| match old {
+    //             Some(_) => Err(ContractError::Claimed {}),
+    //             None => Ok(token),
+    //         })?;
+
+    //     self.increment_tokens(deps.storage)?;
+
+    //     Ok(Response::new()
+    //         .add_attribute("action", "mint")
+    //         .add_attribute("minter", info.sender)
+    //         .add_attribute("token_id", token_id))
+    // }
+
+    // pub fn mint(
+    //     &self,
+    //     deps: DepsMut,
+    //     env: Env,
+    //     info: MessageInfo,
+    //     msg: MintMsg<T>,
+    // ) -> Result<Response<C>, ContractError> {
+    //     let minter = self.minter.load(deps.storage)?;
+
+    //     if info.sender != minter {
+    //         return Err(ContractError::Unauthorized {
+    //             description: Some(String::from("sender is not minter")),
+    //         });
+    //     }
+
+    //     return self._mint(
+    //         deps,
+    //         env,
+    //         info,
+    //         msg.owner,
+    //         msg.token_uri,
+    //         msg.token_id,
+    //         msg.extension,
+    //     );
+    // }
+
     pub fn _mint(
         &self,
         deps: DepsMut,
@@ -132,16 +190,24 @@ where
         owner: String,
         name: String,
         description: Option<String>,
-        image: Option<String>,
+        token_uri: Option<String>,
         extension: T,
         token_id: String,
     ) -> Result<Response<C>, ContractError> {
+        // print!(
+        //     "\nOWNER _mint : {},{},{}\n",
+        //     owner,
+        //     name,
+        //     // description.unwrap(),
+        //     // token_uri.unwrap(),
+        //     token_id
+        // );
         let token = TokenInfo::<T> {
             owner: deps.api.addr_validate(&owner)?,
             approvals: vec![],
             name: name,
             description: description.unwrap_or_default(),
-            image: image,
+            token_uri: token_uri,
             extension: extension,
         };
         self.tokens
@@ -172,6 +238,7 @@ where
                 description: Some(String::from("sender is not minter")),
             });
         }
+        // print!("\nOWNER mint: {}\n", msg.owner);
 
         return self._mint(
             deps,
@@ -180,7 +247,7 @@ where
             msg.owner,
             msg.name,
             msg.description,
-            msg.image,
+            msg.token_uri,
             msg.extension,
             msg.token_id,
         );
@@ -313,6 +380,24 @@ where
             .add_attribute("action", "revoke_all")
             .add_attribute("sender", info.sender)
             .add_attribute("operator", operator))
+    }
+    fn burn(
+        &self,
+        deps: DepsMut,
+        env: Env,
+        info: MessageInfo,
+        token_id: String,
+    ) -> Result<Response<C>, ContractError> {
+        let token = self.tokens.load(deps.storage, &token_id)?;
+        self.check_can_send(deps.as_ref(), &env, &info, &token)?;
+
+        self.tokens.remove(deps.storage, &token_id)?;
+        self.decrease_tokens(deps.storage)?;
+
+        Ok(Response::new()
+            .add_attribute("action", "burn")
+            .add_attribute("sender", info.sender)
+            .add_attribute("token_id", token_id))
     }
 }
 

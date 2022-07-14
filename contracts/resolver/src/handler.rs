@@ -5,7 +5,6 @@ use crate::state::{ADDRESSES, CONFIG};
 use cosmwasm_std::{
     to_binary, Deps, DepsMut, Env, MessageInfo, QueryRequest, Response, StdResult, WasmQuery,
 };
-use cw_storage_plus::U64Key;
 use tns::registry::QueryMsg as RegistryQueryMsg;
 use tns::resolver::{AddressResponse, ConfigResponse, ContentHashResponse, TextDataResponse};
 
@@ -60,7 +59,7 @@ pub fn set_address(
     address: String,
 ) -> Result<Response, ContractError> {
     only_authorized(&deps, &info, &node)?;
-    ADDRESSES.save(deps.storage, (node, U64Key::from(coin_type)), &address)?;
+    ADDRESSES.save(deps.storage, (node, coin_type), &address)?;
     Ok(Response::default())
 }
 
@@ -88,7 +87,7 @@ pub fn query_address(
     node: Vec<u8>,
     coin_type: u64,
 ) -> StdResult<AddressResponse> {
-    let address = ADDRESSES.load(deps.storage, (node, U64Key::from(coin_type)))?;
+    let address = ADDRESSES.load(deps.storage, (node, coin_type))?;
     Ok(AddressResponse { address: address })
 }
 

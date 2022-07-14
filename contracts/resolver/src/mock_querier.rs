@@ -4,6 +4,7 @@ use cosmwasm_std::{
     QuerierResult, QueryRequest, SystemError, SystemResult, Uint128, WasmQuery,
 };
 use std::collections::HashMap;
+use std::marker::PhantomData;
 use terra_cosmwasm::{TaxCapResponse, TaxRateResponse, TerraQuery, TerraQueryWrapper, TerraRoute};
 use tns::registry::QueryMsg as RegistryQueryMsg;
 
@@ -19,6 +20,7 @@ pub fn mock_dependencies(
         storage: MockStorage::default(),
         api: MockApi::default(),
         querier: custom_querier,
+        custom_query_type: PhantomData,
     }
 }
 

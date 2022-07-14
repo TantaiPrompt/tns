@@ -1,0 +1,4 @@
+f57c9e98dfa62083b4360677704ee4f7e5d43d75c543e8cbc89fe8bca0dd78a1  target/wasm32-unknown-unknown/release/controller.wasm
+d9c3f6b764a431efd8c6ac8684a827c3f844cd1a7213227ed9f8be7df800c186  target/wasm32-unknown-unknown/release/registrar.wasm
+1170210f4ba1187c4c858c572473369bfe35898938cdcbb4740569b9a450027c  target/wasm32-unknown-unknown/release/registry.wasm
+ee1b00e48a74ede34173e3045cefdf884cd3934f9296af61fa41267a29149d10  target/wasm32-unknown-unknown/release/resolver.wasm

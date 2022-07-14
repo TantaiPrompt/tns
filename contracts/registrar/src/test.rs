@@ -6,11 +6,11 @@ use cosmwasm_std::testing::{mock_dependencies, mock_env, mock_info};
 use cosmwasm_std::{
     coins, from_binary, to_binary, Addr, CosmosMsg, DepsMut, Empty, Response, WasmMsg,
 };
-use cw0::Expiration;
-use cw721;
+// use cw0::Expiration;
+// use cw721;
 use cw721::{
-    Approval, ApprovedForAllResponse, ContractInfoResponse, Cw721Query, Cw721ReceiveMsg,
-    NftInfoResponse, OwnerOfResponse,
+    Approval, ApprovalsResponse, ContractInfoResponse, Cw721Query, Cw721ReceiveMsg, Expiration,
+    NftInfoResponse, OperatorsResponse, OwnerOfResponse,
 };
 use tns::registrar::{
     ConfigResponse, ExecuteMsg, Extension, InstantiateMsg, IsAvailableResponse, MintMsg, QueryMsg,
@@ -40,7 +40,7 @@ fn setup_contract(deps: DepsMut<'_>) -> Cw721Contract<'static, Extension, Empty>
 
 #[test]
 fn proper_instantiation() {
-    let mut deps = mock_dependencies(&[]);
+    let mut deps = mock_dependencies();
     let contract = Cw721Contract::<Extension, Empty>::default();
 
     let msg = InstantiateMsg {
@@ -81,7 +81,7 @@ fn proper_instantiation() {
 
 #[test]
 fn minting() {
-    let mut deps = mock_dependencies(&[]);
+    let mut deps = mock_dependencies();
     let contract = setup_contract(deps.as_mut());
 
     let token_id = "petrify".to_string();
@@ -93,7 +93,7 @@ fn minting() {
         owner: String::from("medusa"),
         name: name.clone(),
         description: Some(description.clone()),
-        image: None,
+        token_uri: None,
         extension: Extension {},
     });
 
@@ -129,9 +129,7 @@ fn minting() {
     assert_eq!(
         info,
         NftInfoResponse::<Extension> {
-            name,
-            description,
-            image: None,
+            token_uri: None,
             extension: Extension {},
         }
     );
@@ -154,7 +152,7 @@ fn minting() {
         owner: String::from("hercules"),
         name: "copy cat".into(),
         description: None,
-        image: None,
+        token_uri: None,
         extension: Extension {},
     });
 
@@ -172,7 +170,7 @@ fn minting() {
 
 #[test]
 fn transferring_nft() {
-    let mut deps = mock_dependencies(&[]);
+    let mut deps = mock_dependencies();
     let contract = setup_contract(deps.as_mut());
 
     // Mint a token
@@ -185,7 +183,7 @@ fn transferring_nft() {
         owner: String::from("venus"),
         name,
         description: Some(description),
-        image: None,
+        token_uri: None,
         extension: Extension {},
     });
 
@@ -234,7 +232,7 @@ fn transferring_nft() {
 
 #[test]
 fn sending_nft() {
-    let mut deps = mock_dependencies(&[]);
+    let mut deps = mock_dependencies();
     let contract = setup_contract(deps.as_mut());
 
     // Mint a token
@@ -247,7 +245,7 @@ fn sending_nft() {
         owner: String::from("venus"),
         name,
         description: Some(description),
-        image: None,
+        token_uri: None,
         extension: Extension {},
     });
 
@@ -308,7 +306,7 @@ fn sending_nft() {
 
 #[test]
 fn approving_revoking() {
-    let mut deps = mock_dependencies(&[]);
+    let mut deps = mock_dependencies();
     let contract = setup_contract(deps.as_mut());
 
     // Mint a token
@@ -321,7 +319,7 @@ fn approving_revoking() {
         owner: String::from("demeter"),
         name,
         description: Some(description),
-        image: None,
+        token_uri: None,
         extension: Extension {},
     });
 
@@ -415,7 +413,7 @@ fn approving_revoking() {
 
 #[test]
 fn approving_all_revoking_all() {
-    let mut deps = mock_dependencies(&[]);
+    let mut deps = mock_dependencies();
     let contract = setup_contract(deps.as_mut());
 
     // Mint a couple tokens (from the same owner)
@@ -431,7 +429,7 @@ fn approving_all_revoking_all() {
         owner: String::from("demeter"),
         name: name1,
         description: Some(description1),
-        image: None,
+        token_uri: None,
         extension: Extension {},
     });
 
@@ -445,7 +443,7 @@ fn approving_all_revoking_all() {
         owner: String::from("demeter"),
         name: name2,
         description: Some(description2),
-        image: None,
+        token_uri: None,
         extension: Extension {},
     });
 
@@ -517,9 +515,8 @@ fn approving_all_revoking_all() {
     contract
         .execute(deps.as_mut(), mock_env(), owner, approve_all_msg)
         .unwrap();
-
     let res = contract
-        .all_approvals(
+        .operators(
             deps.as_ref(),
             mock_env(),
             String::from("person"),
@@ -528,10 +525,11 @@ fn approving_all_revoking_all() {
             None,
         )
         .unwrap();
+    // println!("\n operators \n");
 
     assert_eq!(
         res,
-        ApprovedForAllResponse {
+        OperatorsResponse {
             operators: vec![Approval {
                 spender: String::from("operator"),
                 expires: Expiration::Never {}
@@ -552,7 +550,7 @@ fn approving_all_revoking_all() {
 
     // and paginate queries
     let res = contract
-        .all_approvals(
+        .operators(
             deps.as_ref(),
             mock_env(),
             String::from("person"),
@@ -563,7 +561,7 @@ fn approving_all_revoking_all() {
         .unwrap();
     assert_eq!(
         res,
-        ApprovedForAllResponse {
+        OperatorsResponse {
             operators: vec![Approval {
                 spender: String::from("buddy"),
                 expires: buddy_expires,
@@ -571,7 +569,7 @@ fn approving_all_revoking_all() {
         }
     );
     let res = contract
-        .all_approvals(
+        .operators(
             deps.as_ref(),
             mock_env(),
             String::from("person"),
@@ -582,7 +580,7 @@ fn approving_all_revoking_all() {
         .unwrap();
     assert_eq!(
         res,
-        ApprovedForAllResponse {
+        OperatorsResponse {
             operators: vec![Approval {
                 spender: String::from("operator"),
                 expires: Expiration::Never {}
@@ -599,7 +597,7 @@ fn approving_all_revoking_all() {
 
     // Approvals are removed / cleared without affecting others
     let res = contract
-        .all_approvals(
+        .operators(
             deps.as_ref(),
             mock_env(),
             String::from("person"),
@@ -610,7 +608,7 @@ fn approving_all_revoking_all() {
         .unwrap();
     assert_eq!(
         res,
-        ApprovedForAllResponse {
+        OperatorsResponse {
             operators: vec![Approval {
                 spender: String::from("buddy"),
                 expires: buddy_expires,
@@ -622,7 +620,7 @@ fn approving_all_revoking_all() {
     let mut late_env = mock_env();
     late_env.block.height = 1234568; //expired
     let res = contract
-        .all_approvals(
+        .operators(
             deps.as_ref(),
             late_env,
             String::from("person"),
@@ -636,15 +634,15 @@ fn approving_all_revoking_all() {
 
 #[test]
 fn query_tokens_by_owner() {
-    let mut deps = mock_dependencies(&[]);
+    let mut deps = mock_dependencies();
     let contract = setup_contract(deps.as_mut());
     let minter = mock_info("creator", &[]);
 
     // Mint a couple tokens (from the same owner)
     let token_id1 = "grow1".to_string();
-    let demeter = String::from("Demeter");
+    let demeter = String::from("demeter");
     let token_id2 = "grow2".to_string();
-    let ceres = String::from("Ceres");
+    let ceres = String::from("ceres");
     let token_id3 = "sing".to_string();
 
     let mint_msg = ExecuteMsg::Mint(MintMsg::<Extension> {
@@ -652,9 +650,26 @@ fn query_tokens_by_owner() {
         owner: demeter.clone(),
         name: "Growing power".to_string(),
         description: Some("Allows the owner the power to grow anything".to_string()),
-        image: None,
+        token_uri: None,
         extension: Extension {},
     });
+
+    // let mut deps = mock_dependencies();
+    // let contract = setup_contract(deps.as_mut());
+
+    // let token_id = "petrify".to_string();
+    // let name = "Petrify with Gaze".to_string();
+    // let description = "Allows the owner to petrify anyone looking at him or her".to_string();
+
+    // let mint_msg = ExecuteMsg::Mint(MintMsg::<Extension> {
+    //     token_id: token_id.clone(),
+    //     owner: String::from("medusa"),
+    //     name: name.clone(),
+    //     description: Some(description.clone()),
+    //     token_uri: None,
+    //     extension: Extension {},
+    // });
+
     contract
         .execute(deps.as_mut(), mock_env(), minter.clone(), mint_msg)
         .unwrap();
@@ -664,7 +679,7 @@ fn query_tokens_by_owner() {
         owner: ceres.clone(),
         name: "More growing power".to_string(),
         description: Some("Allows the owner the power to grow anything even faster".to_string()),
-        image: None,
+        token_uri: None,
         extension: Extension {},
     });
     contract
@@ -676,7 +691,7 @@ fn query_tokens_by_owner() {
         owner: demeter.clone(),
         name: "Sing a lullaby".to_string(),
         description: Some("Calm even the most excited children".to_string()),
-        image: None,
+        token_uri: None,
         extension: Extension {},
     });
     contract
@@ -728,7 +743,7 @@ fn test_is_available() {
         grace_period: None,
     };
 
-    let mut deps = mock_dependencies(&[]);
+    let mut deps = mock_dependencies();
     let info = mock_info("creator", &coins(0, "uusd"));
     let _res = entry::instantiate(deps.as_mut(), mock_env(), info, msg).unwrap();
 
@@ -753,7 +768,7 @@ fn test_register() {
         grace_period: None,
     };
 
-    let mut deps = mock_dependencies(&[]);
+    let mut deps = mock_dependencies();
     let info = mock_info("creator", &coins(0, "uusd"));
     let _res = entry::instantiate(deps.as_mut(), mock_env(), info, msg).unwrap();
 
@@ -808,7 +823,7 @@ fn test_register() {
     )
     .unwrap();
     let nft_info_response: NftInfoResponse<Extension> = from_binary(&nft_info_query).unwrap();
-    assert_eq!(nft_info_response.name, "alice.ust");
+    // assert_eq!(nft_info_response.name, "alice.ust");
 
     assert_eq!(res.messages.len(), 1); // set subnode owner
 
@@ -837,7 +852,7 @@ fn test_reclaim() {
         registry_address: registry_address.clone(),
         grace_period: None,
     };
-    let mut deps = mock_dependencies(&[]);
+    let mut deps = mock_dependencies();
     let info = mock_info("creator", &coins(0, "uusd"));
     let _res = entry::instantiate(deps.as_mut(), mock_env(), info, msg).unwrap();
 
@@ -971,7 +986,7 @@ fn test_set_config() {
         registry_address: registry_address.clone(),
         grace_period: None,
     };
-    let mut deps = mock_dependencies(&[]);
+    let mut deps = mock_dependencies();
     let info = mock_info("creator", &coins(0, "uusd"));
     let _res = entry::instantiate(deps.as_mut(), mock_env(), info, msg).unwrap();
 

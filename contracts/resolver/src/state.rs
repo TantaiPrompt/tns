@@ -2,7 +2,7 @@ use schemars::JsonSchema;
 use serde::{Deserialize, Serialize};
 
 use cosmwasm_std::CanonicalAddr;
-use cw_storage_plus::{Item, Map, U64Key};
+use cw_storage_plus::{Item, Map};
 
 #[derive(Serialize, Deserialize, Clone, Debug, PartialEq, JsonSchema)]
 pub struct Config {
@@ -13,7 +13,7 @@ pub struct Config {
 
 pub const CONFIG: Item<Config> = Item::new("CONFIG");
 
-pub const ADDRESSES: Map<(Vec<u8>, U64Key), String> = Map::new("ADDRESSES");
+pub const ADDRESSES: Map<(Vec<u8>, u64), String> = Map::new("ADDRESSES");
 
 pub const TEXT_DATA: Map<(Vec<u8>, String), String> = Map::new("TEXT");
 

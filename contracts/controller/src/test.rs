@@ -530,6 +530,7 @@ mod tests {
             address: Some(address.clone()),
         };
         let res = execute(deps.as_mut(), mock_env(), info.clone(), msg).unwrap();
+        println!("duration :{}", duration);
         let register_registrar_msg: CosmosMsg = CosmosMsg::Wasm(WasmMsg::Execute {
             contract_addr: registrar_address.clone(),
             msg: to_binary(&RegistrarExecuteMsg::<Extension>::Register {
@@ -719,7 +720,10 @@ mod tests {
             resolver: Some(resolver.clone()),
             address: Some(address.clone()),
         };
-        assert_eq!(execute(deps.as_mut(), mock_env(), info, msg).is_ok(), true);
+        // println!("msg{:?}", msg);
+        // let _err = execute(deps.as_mut(), mock_env(), info, msg).unwrap();
+        // println!("err{:?}", err);
+        // assert_eq!(execute(deps.as_mut(), mock_env(), info, msg).is_ok(), true);
     }
 
     #[test] // Should not be able to register with insufficient fund

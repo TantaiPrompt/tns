@@ -1,0 +1,12 @@
+/Users/prompt/Desktop/six/six-protocol/tns/target/debug/deps/libthiserror_impl-f3853230d8af1cac.dylib: /Users/prompt/.cargo/registry/src/github.com-1ecc6299db9ec823/thiserror-impl-1.0.31/src/lib.rs /Users/prompt/.cargo/registry/src/github.com-1ecc6299db9ec823/thiserror-impl-1.0.31/src/ast.rs /Users/prompt/.cargo/registry/src/github.com-1ecc6299db9ec823/thiserror-impl-1.0.31/src/attr.rs /Users/prompt/.cargo/registry/src/github.com-1ecc6299db9ec823/thiserror-impl-1.0.31/src/expand.rs /Users/prompt/.cargo/registry/src/github.com-1ecc6299db9ec823/thiserror-impl-1.0.31/src/fmt.rs /Users/prompt/.cargo/registry/src/github.com-1ecc6299db9ec823/thiserror-impl-1.0.31/src/generics.rs /Users/prompt/.cargo/registry/src/github.com-1ecc6299db9ec823/thiserror-impl-1.0.31/src/prop.rs /Users/prompt/.cargo/registry/src/github.com-1ecc6299db9ec823/thiserror-impl-1.0.31/src/valid.rs
+
+/Users/prompt/Desktop/six/six-protocol/tns/target/debug/deps/thiserror_impl-f3853230d8af1cac.d: /Users/prompt/.cargo/registry/src/github.com-1ecc6299db9ec823/thiserror-impl-1.0.31/src/lib.rs /Users/prompt/.cargo/registry/src/github.com-1ecc6299db9ec823/thiserror-impl-1.0.31/src/ast.rs /Users/prompt/.cargo/registry/src/github.com-1ecc6299db9ec823/thiserror-impl-1.0.31/src/attr.rs /Users/prompt/.cargo/registry/src/github.com-1ecc6299db9ec823/thiserror-impl-1.0.31/src/expand.rs /Users/prompt/.cargo/registry/src/github.com-1ecc6299db9ec823/thiserror-impl-1.0.31/src/fmt.rs /Users/prompt/.cargo/registry/src/github.com-1ecc6299db9ec823/thiserror-impl-1.0.31/src/generics.rs /Users/prompt/.cargo/registry/src/github.com-1ecc6299db9ec823/thiserror-impl-1.0.31/src/prop.rs /Users/prompt/.cargo/registry/src/github.com-1ecc6299db9ec823/thiserror-impl-1.0.31/src/valid.rs
+
+/Users/prompt/.cargo/registry/src/github.com-1ecc6299db9ec823/thiserror-impl-1.0.31/src/lib.rs:
+/Users/prompt/.cargo/registry/src/github.com-1ecc6299db9ec823/thiserror-impl-1.0.31/src/ast.rs:
+/Users/prompt/.cargo/registry/src/github.com-1ecc6299db9ec823/thiserror-impl-1.0.31/src/attr.rs:
+/Users/prompt/.cargo/registry/src/github.com-1ecc6299db9ec823/thiserror-impl-1.0.31/src/expand.rs:
+/Users/prompt/.cargo/registry/src/github.com-1ecc6299db9ec823/thiserror-impl-1.0.31/src/fmt.rs:
+/Users/prompt/.cargo/registry/src/github.com-1ecc6299db9ec823/thiserror-impl-1.0.31/src/generics.rs:
+/Users/prompt/.cargo/registry/src/github.com-1ecc6299db9ec823/thiserror-impl-1.0.31/src/prop.rs:
+/Users/prompt/.cargo/registry/src/github.com-1ecc6299db9ec823/thiserror-impl-1.0.31/src/valid.rs:

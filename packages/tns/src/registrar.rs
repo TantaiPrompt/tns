@@ -1,5 +1,5 @@
 use cosmwasm_std::{Addr, Binary, BlockInfo};
-use cw0::Expiration;
+use cw721::Expiration;
 use cw_storage_plus::{Index, IndexList, MultiIndex};
 use schemars::JsonSchema;
 use serde::de::DeserializeOwned;
@@ -94,7 +94,7 @@ pub enum ExecuteMsg<T> {
         id: String,
         owner: String,
         duration: u64,
-        name: String
+        name: String,
     },
     AddController {
         address: String,
@@ -105,7 +105,7 @@ pub enum ExecuteMsg<T> {
     SetConfig {
         grace_period: u64,
         registry_address: String,
-        owner: String
+        owner: String,
     },
     Renew {
         id: String,
@@ -270,7 +270,8 @@ pub struct TokenInfo<T> {
     /// Describes the asset to which this NFT represents
     pub description: String,
     /// A URI pointing to an image representing the asset
-    pub image: Option<String>,
+    // pub image: Option<String>,
+    pub token_uri: Option<String>,
 
     /// You can add any custom metadata here when you extend cw721-base
     pub extension: T,
@@ -287,7 +288,8 @@ where
     T: Serialize + DeserializeOwned + Clone,
 {
     // pk goes to second tuple element
-    pub owner: MultiIndex<'a, (Addr, Vec<u8>), TokenInfo<T>>,
+    // pub owner: MultiIndex<'a, (Addr, Vec<u8>), TokenInfo<T>>,
+    pub owner: MultiIndex<'a, Addr, TokenInfo<T>, Addr>,
 }
 
 impl<'a, T> IndexList<TokenInfo<T>> for TokenIndexes<'a, T>
@@ -318,7 +320,10 @@ pub struct MintMsg<T> {
     /// Describes the asset to which this NFT represents (may be empty)
     pub description: Option<String>,
     /// A URI pointing to an image representing the asset
-    pub image: Option<String>,
+    /// Universal resource identifier for this NFT
+    /// Should point to a JSON file that conforms to the ERC721
+    /// Metadata JSON Schema
+    pub token_uri: Option<String>,
     /// Any custom extension used by this contract
     pub extension: T,
 }

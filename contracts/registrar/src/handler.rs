@@ -26,7 +26,7 @@ fn only_controller(deps: Deps, info: &MessageInfo) -> Result<bool, ContractError
         .unwrap_or(false);
     if !is_controller {
         return Err(ContractError::NotController {
-            sender: info.sender.to_string()
+            sender: info.sender.to_string(),
         });
     }
     Ok(is_controller)

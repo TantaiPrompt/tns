@@ -94,13 +94,13 @@ pub struct TokenInfo<T> {
     /// Approvals are stored here, as we clear them all upon transfer and cannot accumulate much
     pub approvals: Vec<Approval>,
 
-    /// Identifies the asset to which this NFT represents
+    // /// Identifies the asset to which this NFT represents
     pub name: String,
     /// Describes the asset to which this NFT represents
     pub description: String,
-    /// A URI pointing to an image representing the asset
-    pub image: Option<String>,
-
+    // /// A URI pointing to an image representing the asset
+    // pub image: Option<String>,
+    pub token_uri: Option<String>,
     /// You can add any custom metadata here when you extend cw721-base
     pub extension: T,
 }
@@ -124,7 +124,7 @@ where
     T: Serialize + DeserializeOwned + Clone,
 {
     // pk goes to second tuple element
-    pub owner: MultiIndex<'a, (Addr, Vec<u8>), TokenInfo<T>>,
+    pub owner: MultiIndex<'a, Addr, TokenInfo<T>, Addr>,
 }
 
 impl<'a, T> IndexList<TokenInfo<T>> for TokenIndexes<'a, T>
@@ -137,8 +137,8 @@ where
     }
 }
 
-pub fn token_owner_idx<T>(d: &TokenInfo<T>, k: Vec<u8>) -> (Addr, Vec<u8>) {
-    (d.owner.clone(), k)
+pub fn token_owner_idx<T>(d: &TokenInfo<T>) -> Addr {
+    d.owner.clone()
 }
 
 #[derive(Serialize, Deserialize, Clone, Debug, PartialEq, JsonSchema)]

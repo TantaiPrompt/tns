@@ -48,7 +48,7 @@ pub fn withdraw(deps: DepsMut, env: Env, info: MessageInfo) -> Result<Response, 
         },
         amount,
     };
-    let message = total_asset.into_msg(&deps.querier, info.sender);
+    let message = total_asset.into_msg(info.sender);
     Ok(Response::new()
         .add_message(message?)
         .add_attribute("method", "withdraw")
@@ -153,6 +153,8 @@ fn validate_name(deps: Deps, name: String) -> Result<(), ContractError> {
     if !get_is_valid_name(&name)?.is_valid_name {
         return Err(ContractError::InvalidName {});
     }
+
+    // println!("msg_register");
 
     if !is_available_name(deps, &name)? || !get_is_valid_name(&name)?.is_valid_name {
         return Err(ContractError::UnavailabledName {});
@@ -403,7 +405,6 @@ pub fn owner_register(
     address: Option<String>,
 ) -> Result<Response, ContractError> {
     only_owner(deps.as_ref(), &info)?;
-
     if !is_available_name(deps.as_ref(), &name)? {
         return Err(ContractError::UnavailabledName {});
     }
@@ -560,11 +561,14 @@ pub fn is_available_name(deps: Deps, name: &String) -> StdResult<bool> {
         .api
         .addr_humanize(&config.registrar_address)?
         .to_string();
+    println!("\n owner_registrar : {}\n", registrar_address);
+    println!("\n registrar id : {}\n", id);
     let is_available_response: IsAvailableResponse =
         deps.querier.query(&QueryRequest::Wasm(WasmQuery::Smart {
             contract_addr: registrar_address,
             msg: to_binary(&RegistrarQueryMsg::IsAvailable { id })?,
         }))?;
+    // println!("regis_addr");
     return Ok(is_available_response.available);
 }
 
