@@ -723,7 +723,7 @@ mod tests {
         // println!("msg{:?}", msg);
         // let _err = execute(deps.as_mut(), mock_env(), info, msg).unwrap();
         // println!("err{:?}", err);
-        // assert_eq!(execute(deps.as_mut(), mock_env(), info, msg).is_ok(), true);
+        assert_eq!(execute(deps.as_mut(), mock_env(), info, msg).is_ok(), true);
     }
 
     #[test] // Should not be able to register with insufficient fund

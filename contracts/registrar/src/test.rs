@@ -9,8 +9,8 @@ use cosmwasm_std::{
 // use cw0::Expiration;
 // use cw721;
 use cw721::{
-    Approval, ApprovalsResponse, ContractInfoResponse, Cw721Query, Cw721ReceiveMsg, Expiration,
-    NftInfoResponse, OperatorsResponse, OwnerOfResponse,
+    Approval, ContractInfoResponse, Cw721Query, Cw721ReceiveMsg, Expiration, NftInfoResponse,
+    OperatorsResponse, OwnerOfResponse,
 };
 use tns::registrar::{
     ConfigResponse, ExecuteMsg, Extension, InstantiateMsg, IsAvailableResponse, MintMsg, QueryMsg,
@@ -814,15 +814,15 @@ fn test_register() {
     let owner_of_response: OwnerOfResponse = from_binary(&owner_of_query).unwrap();
     assert_eq!(owner_of_response.owner, "controller_address");
 
-    let nft_info_query = entry::query(
-        deps.as_ref(),
-        mock_env(),
-        QueryMsg::NftInfo {
-            token_id: id.clone(),
-        },
-    )
-    .unwrap();
-    let nft_info_response: NftInfoResponse<Extension> = from_binary(&nft_info_query).unwrap();
+    // let nft_info_query = entry::query(
+    //     deps.as_ref(),
+    //     mock_env(),
+    //     QueryMsg::NftInfo {
+    //         token_id: id.clone(),
+    //     },
+    // )
+    // .unwrap();
+    // let nft_info_response: NftInfoResponse<Extension> = from_binary(&nft_info_query).unwrap();
     // assert_eq!(nft_info_response.name, "alice.ust");
 
     assert_eq!(res.messages.len(), 1); // set subnode owner
